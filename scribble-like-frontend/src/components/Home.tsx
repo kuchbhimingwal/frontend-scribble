@@ -1,8 +1,17 @@
 import React from 'react'
+import { useSocket } from '../hooks/useSocket'
+import { useNavigate } from 'react-router-dom';
 
 function Home() {
+  const navigate = useNavigate();
+  const socket = useSocket();
   const clickHandler = ()=>{
-    
+    if(socket){
+      socket.send(JSON.stringify({
+        type: "INIT_GAME"
+    }))
+    }
+    navigate('/gamepage', { state: socket });
   }
   return (
     <div className=''>
