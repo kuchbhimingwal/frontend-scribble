@@ -34,6 +34,7 @@ function Gamepage() {
             break;
           case "GUESS":
             console.log(message.payload.guessed);
+            setMessages(message.payload.guessed);
             break;
           case "GUESSED":
             alert(message.payload.message);
@@ -41,6 +42,7 @@ function Gamepage() {
       }
   }
   },[socket])
+  // console.log(messages);
   if(!socket) return <div>
     <h1>connecting to the server...</h1>
     </div>

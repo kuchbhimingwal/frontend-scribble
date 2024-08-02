@@ -12,15 +12,18 @@ function Messagebox({messages, socket}:any) {
     }))
     }
   }
+  console.log(messages);
+  
     return (
     <div>
-      {messages.map((message:any)=>{
+      {messages.map((message:any)=>(
         // console.log(message);
         <div className='flex justify-end'>
-          <h1>{message.player}</h1>
-          <p>{message.guessWord}</p>
+          <p>{message.guessWord} - </p>
+
+          <h1>- {message.player}</h1>
         </div>
-      })}
+      ))}
       <input type="text" onChange={(e)=>{setWordsending(e.target.value)}}/>
       <button onClick={clickHandler}>Guess</button>
     </div>
