@@ -15,8 +15,7 @@ function Messagebox({messages, socket}:any) {
     return (
     <div>
       {messages.map((message:any)=>{
-        console.log(message);
-        
+        // console.log(message);
         <div className='flex justify-end'>
           <h1>{message.player}</h1>
           <p>{message.guessWord}</p>

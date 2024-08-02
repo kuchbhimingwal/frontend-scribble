@@ -33,8 +33,11 @@ function Gamepage() {
             setTimer(message.payload.time);
             break;
           case "GUESS":
-            setMessages((prevArray) => [...prevArray, message.payload]);
+            console.log(message.payload.guessed);
             break;
+          case "GUESSED":
+            alert(message.payload.message);
+
       }
   }
   },[socket])
