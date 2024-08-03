@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import Messagebox from './Messagebox';
 import { useSocket } from '../hooks/useSocket';
+import Sender from './Sender';
+import Reciever from './Reciever';
 
 function Gamepage() {
   const socket = useSocket();
@@ -9,7 +11,10 @@ function Gamepage() {
   const [guessing, setGuessing] = useState(false);
   const [timer, setTimer] = useState(0);
   const [word, setWord] = useState("");
-  const [started, setStarted] = useState(false)
+  const [started, setStarted] = useState(false);
+  const [currentPoint, setCurrentPoint] = useState(null)
+  const [prevPoint, setPrevPoint] = useState(null)
+  const [color, setColor] = useState("#000000")
   useEffect(()=>{
     if (!socket) {
       return;
@@ -33,16 +38,28 @@ function Gamepage() {
             setTimer(message.payload.time);
             break;
           case "GUESS":
-            console.log(message.payload.guessed);
+            // console.log(message.payload.guessed);
             setMessages(message.payload.guessed);
             break;
           case "GUESSED":
-            alert(message.payload.message);
-
+            console.log(message.payload.message);
+            break;
+          case "DRAWING_LINES":
+            console.log("reached");
+            
+            setCurrentPoint(message.payload.currentPoint);
+            console.log("cureentpoint" + message.payload.currentPoint);
+            
+            setPrevPoint(message.payload.prevPoint);
+            // console.log("prevpoint", message.payload.prevPoint);
+            
+            setColor(message.payload.color)
+            // console.log("color",message.payload.color);
+            
+            break;
       }
   }
   },[socket])
-  // console.log(messages);
   if(!socket) return <div>
     <h1>connecting to the server...</h1>
     </div>
@@ -56,15 +73,16 @@ function Gamepage() {
       <div>
         <Messagebox messages={messages} socket={socket}/>
       </div>
-    <div className="pt-8">
-                        {!started && <button onClick={() => {
-                            socket.send(JSON.stringify({
-                                type: "INIT_GAME"
-                            }))
-                        }} >
-                            Play
-                        </button>}
-                    </div>
+      <div className="pt-8">
+            {!started && <button onClick={() => {
+                    socket.send(JSON.stringify({
+                    type: "INIT_GAME"
+                }))
+            }} >
+              Play
+          </button>}
+        </div>
+        {guessing ? <Reciever currentPoint={currentPoint} prevPoint={prevPoint} color={color}/> : <Sender socket={socket} />}
     </div>
   )
 }
