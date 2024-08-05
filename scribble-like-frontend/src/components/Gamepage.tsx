@@ -19,7 +19,11 @@ function Gamepage() {
     if (!socket) {
       return;
   }
+  // console.log("reched 1");
+  
   socket.onmessage = (event:any) => {
+    // console.log("reched");
+    
       const message = JSON.parse(event.data);
       switch (message.type) {
           case "INIT_GAME":
@@ -45,16 +49,12 @@ function Gamepage() {
             console.log(message.payload.message);
             break;
           case "DRAWING_LINES":
-            console.log("reached");
             
             setCurrentPoint(message.payload.currentPoint);
-            console.log("cureentpoint" + message.payload.currentPoint);
             
             setPrevPoint(message.payload.prevPoint);
-            // console.log("prevpoint", message.payload.prevPoint);
             
             setColor(message.payload.color)
-            // console.log("color",message.payload.color);
             
             break;
       }

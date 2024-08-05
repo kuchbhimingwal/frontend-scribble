@@ -9,29 +9,14 @@ type Draw = {
 type Point = { x: number; y: number } | null
 
 function Receiver({ currentPoint , prevPoint , color}:any) {
-  
-  // useEffect(()=>{
-  //   // @ts-ignore
-  //   ctx?.clearRect(0, 0, canvasRef.current?.width, canvasRef.current?.height);
-  // },[])
-  
-  // console.log(currentPoint);
-  
   const canvasRef = useRef(null);
   // @ts-ignore
   const ctx = canvasRef.current?.getContext('2d');
-  // @ts-ignore
-  // ctx?.clearRect(0, 0, canvasRef.current?.width, canvasRef.current?.height)
   
   drawLine({ ctx, currentPoint, prevPoint })
   function drawLine({ prevPoint, currentPoint, ctx }: Draw) {
     if(!prevPoint || !currentPoint) return
     const { x: currX, y: currY } = currentPoint
-    // setPrevPoint(prevPoint);
-    // setCurrentPoint(currentPoint);
-    // console.log(prevPoint);
-    // console.log(currentPoint);
-    // console.log(color);
     const lineColor = color
     const lineWidth = 5
   
