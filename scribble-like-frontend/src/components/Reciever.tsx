@@ -40,8 +40,8 @@ function Receiver({ currentPoint , prevPoint , color}:any) {
     <div>
       <canvas
         ref={canvasRef}
-        width={750}
-        height={750}
+        width={500}
+        height={500}
         className='border border-black rounded-md'
       />
     </div>

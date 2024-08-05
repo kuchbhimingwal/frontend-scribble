@@ -51,8 +51,8 @@ function Sender({socket}:any) {
       <canvas
         ref={canvasRef}
         onMouseDown={onMouseDown}
-        width={750}
-        height={750}
+        width={500}
+        height={500}
         className='border border-black rounded-md'
       />
     </div>
