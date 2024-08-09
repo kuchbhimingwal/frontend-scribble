@@ -15,6 +15,10 @@ function Receiver({ currentPoint , prevPoint , color}:any) {
   
   drawLine({ ctx, currentPoint, prevPoint })
   function drawLine({ prevPoint, currentPoint, ctx }: Draw) {
+    console.log("prevpoint", prevPoint);
+    console.log("currentpoint", currentPoint);
+    console.log("ctx", ctx);
+    
     if(!prevPoint || !currentPoint) return
     const { x: currX, y: currY } = currentPoint
     const lineColor = color
